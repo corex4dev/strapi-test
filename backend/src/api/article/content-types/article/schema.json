@@ -32,6 +32,12 @@
       "type": "uid",
       "targetField": "title",
       "required": true
+    },
+    "blocks": {
+      "type": "blocks"
+    },
+    "markdown": {
+      "type": "richtext"
     }
   }
 }

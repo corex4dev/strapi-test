@@ -1,7 +1,10 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function Home() {
-  const data = await fetch("http://localhost:1337/api/articles?populate[0]=image");
+  const data = await fetch(
+    "http://localhost:1337/api/articles?populate[0]=image"
+  );
   const articles = (await data.json()).data;
 
   return (
@@ -14,16 +17,16 @@ export default async function Home() {
               key={article.id}
             >
               <div className="relative">
-                <a href="#">
+                <Link href={`/${article.slug}`}>
                   <Image
-                      className="w-full"
-                      src={article.image.url}
-                      alt="Sunset in the mountains"
-                      width={500}
-                      height={500}
-                    />
+                    className="w-full"
+                    src={article.image.url}
+                    alt="Sunset in the mountains"
+                    width={500}
+                    height={500}
+                  />
                   <div className="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left- opacity-25"></div>
-                </a>
+                </Link>
               </div>
               <div className="px-6 py-4 mb-auto">
                 <a
