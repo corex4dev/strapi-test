@@ -8,135 +8,84 @@ export default async function Home() {
   const articles = (await data.json()).data;
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
-          {(articles || []).map((article: any) => (
-            <div
-              className="rounded overflow-hidden shadow-lg flex flex-col border border-gray-300"
-              key={article.id}
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+      {(articles || []).map((article: any) => (
+        <div
+          className="rounded overflow-hidden shadow-lg flex flex-col border border-gray-300"
+          key={article.id}
+        >
+          <div className="relative">
+            <Link href={`/${article.slug}`}>
+              <Image
+                className="w-full"
+                src={article.image.url}
+                alt="Sunset in the mountains"
+                width={500}
+                height={500}
+              />
+              <div className="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left- opacity-25"></div>
+            </Link>
+          </div>
+          <div className="px-6 py-4 mb-auto">
+            <a
+              href="#"
+              className="font-medium text-lg hover:text-indigo-600 transition duration-200 ease-in-out mb-2"
             >
-              <div className="relative">
-                <Link href={`/${article.slug}`}>
-                  <Image
-                    className="w-full"
-                    src={article.image.url}
-                    alt="Sunset in the mountains"
-                    width={500}
-                    height={500}
-                  />
-                  <div className="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left- opacity-25"></div>
-                </Link>
-              </div>
-              <div className="px-6 py-4 mb-auto">
-                <a
-                  href="#"
-                  className="font-medium text-lg hover:text-indigo-600 transition duration-200 ease-in-out mb-2"
-                >
-                  {article.title}
-                </a>
-                <p className="text-gray-500 text-sm">{article.description}</p>
-              </div>
-              <div className="px-6 py-3 flex flex-row items-center justify-between">
-                <span className="py-1 text-xs font-regular mr-1 flex flex-row items-center">
-                  <svg
-                    height="13px"
-                    width="13px"
-                    version="1.1"
-                    id="Layer_1"
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlnsXlink="http://www.w3.org/1999/xlink"
-                    x="0px"
-                    y="0px"
-                    viewBox="0 0 512 512"
-                    xmlSpace="preserve"
-                  >
-                    <g>
-                      <g>
-                        <path
-                          fill="currentColor"
-                          d="M256,0C114.837,0,0,114.837,0,256s114.837,256,256,256s256-114.837,256-256S397.163,0,256,0z M277.333,256 c0,11.797-9.536,21.333-21.333,21.333h-85.333c-11.797,0-21.333-9.536-21.333-21.333s9.536-21.333,21.333-21.333h64v-128 c0-11.797,9.536-21.333,21.333-21.333s21.333,9.536,21.333,21.333V256z"
-                        ></path>
-                      </g>
-                    </g>
-                  </svg>
-                  <span className="ml-1">
-                    {Intl.DateTimeFormat("es-ES", {
-                      year: "numeric",
-                      month: "2-digit",
-                      day: "2-digit",
-                    }).format(new Date(article.createdAt))}
-                  </span>
-                </span>
-
-                <span className="py-1 text-xs font-regular mr-1 flex flex-row items-center">
-                  <svg
-                    className="h-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
+              {article.title}
+            </a>
+            <p className="text-gray-500 text-sm">{article.description}</p>
+          </div>
+          <div className="px-6 py-3 flex flex-row items-center justify-between">
+            <span className="py-1 text-xs font-regular mr-1 flex flex-row items-center">
+              <svg
+                height="13px"
+                width="13px"
+                version="1.1"
+                id="Layer_1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlnsXlink="http://www.w3.org/1999/xlink"
+                x="0px"
+                y="0px"
+                viewBox="0 0 512 512"
+                xmlSpace="preserve"
+              >
+                <g>
+                  <g>
                     <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
+                      fill="currentColor"
+                      d="M256,0C114.837,0,0,114.837,0,256s114.837,256,256,256s256-114.837,256-256S397.163,0,256,0z M277.333,256 c0,11.797-9.536,21.333-21.333,21.333h-85.333c-11.797,0-21.333-9.536-21.333-21.333s9.536-21.333,21.333-21.333h64v-128 c0-11.797,9.536-21.333,21.333-21.333s21.333,9.536,21.333,21.333V256z"
                     ></path>
-                  </svg>
-                  <span className="ml-1">{article.author}</span>
-                </span>
-              </div>
-            </div>
-          ))}
+                  </g>
+                </g>
+              </svg>
+              <span className="ml-1">
+                {Intl.DateTimeFormat("es-ES", {
+                  year: "numeric",
+                  month: "2-digit",
+                  day: "2-digit",
+                }).format(new Date(article.createdAt))}
+              </span>
+            </span>
+
+            <span className="py-1 text-xs font-regular mr-1 flex flex-row items-center">
+              <svg
+                className="h-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
+                ></path>
+              </svg>
+              <span className="ml-1">{article.author}</span>
+            </span>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      ))}
     </div>
   );
 }
